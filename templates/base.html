@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sturnus</title>
+	<script src="/files/d3.v2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  </head>
+  <body>
+		 
+<script type="text/javascript">
+function search(){
+window.location = $("#searchbox").val()
+};
+</script>
+<input type="text" name="" id="searchbox" value="leonsass"/>
+<button onclick="search()">Graphit</button>
+{%if user_id %}
+<iframe id="ourFrame" src="/user_id/{{user_id}}" width="1000" height="1000">
+Not supported on your browser.</iframe> 
+{%endif%}
+ </div>
+ </div>
+  </body>
+</html>
