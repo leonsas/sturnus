@@ -101,7 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'sturnus.urls'
+ROOT_URLCONF = 'app.urls'
 
 TEMPLATE_DIRS = (
 'C:/Users/leonsas/Desktop/dj/sturnus/templates',
