@@ -5,15 +5,15 @@
     <title>Sturnus</title>
 	<script src="/files/d3.v2.js"></script>
   </head>
-  <body>
+  <body >
 	
-<button onclick="addtonodes()" text="add"/>
+
 <script type="text/javascript">
 
  
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 960 - margin.top - margin.bottom;
 
 var n = 20,
     m = 1,
@@ -28,8 +28,8 @@ nodes = nodes.nodes.map(function(obj) {
 var force = d3.layout.force()
     .nodes(nodes)
     .size([width, height])
-    .gravity(0)
-    .charge(0)
+    .gravity(-0.02)
+    .charge(-20)
     .on("tick", tick)
     .start();
 
@@ -43,6 +43,7 @@ var circle = svg.selectAll("circle")
     .data(nodes)
   .enter().append("circle")
     .attr("r", function(d) { return d.radius; })
+	.attr("fill","#0066CC")
     .call(force.drag);
 circle.append("title").text(function(d){return d.screen_name +": " + d.followers_count;});
 

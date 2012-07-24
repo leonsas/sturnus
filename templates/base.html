@@ -6,20 +6,35 @@
 	<script src="/files/d3.v2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   </head>
-  <body>
-		 
+  <body style="background-color:#E8E8E8  ;">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33614666-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>		 
 <script type="text/javascript">
 function search(){
-window.location = $("#searchbox").val()
+document.location.href = '../' + $("#searchbox").val()
 };
 </script>
+<div  style="margin-left: auto; margin-right: auto; display: block; width: 300px;">
 <input type="text" name="" id="searchbox" value="leonsass"/>
 <button onclick="search()">Graphit</button>
+</div>
+<div style="height: 100%; margin-left: auto; margin-right: auto; width: 1200px;">
 {%if user_id %}
-<iframe id="ourFrame" src="/user_id/{{user_id}}" width="1000" height="1000">
+<iframe id="ourFrame" src="/user_id/{{user_id}}" width="1200" height="1000">
 Not supported on your browser.</iframe> 
 {%endif%}
  </div>
- </div>
+
   </body>
 </html>

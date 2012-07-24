@@ -5,7 +5,11 @@ import simplejson as json
 def getFriends(id):
 	q=tweepy.api.friends(user_id=id,cursor=-1)
 	list_users=q[0]
+	print "Getting %s friends.." % (str(id))
+	ct=0
 	while len(q[0])>0:
+		print "Cursor counter at: %d" % (ct)
+		ct= ct+1
 		q=tweepy.api.friends(user_id=id,cursor=q[1][1])
 		list_users=list_users+q[0]
 	list_dict_users=[]

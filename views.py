@@ -10,12 +10,12 @@ import friendgrapher
 import tweepy
 	
 def home(request,screenname=None):
-	print "screenname: %s" % screenname
+
 	id = None
 	if screenname:
 		user=tweepy.api.get_user(screen_name=screenname)
 		id=user.id
-		print id
+	
 	
 	return render_to_response('base.html',
                                    {"user_id":id},
@@ -23,6 +23,7 @@ def home(request,screenname=None):
                                 )
 	
 def json_server(request, user_id=None):
+    print "getting info: %s" % (str(user_id))
     retStr=str(friendgrapher.create_dataset(friendgrapher.getFriends(user_id)))
     return HttpResponse(retStr)
 		
