@@ -1,6 +1,6 @@
 import tweepy
 import simplejson as json
-from geopy import geocoders
+#from geopy import geocoders
 
 #param id can be string or int
 def getFriends(id):
@@ -49,15 +49,15 @@ def create_dataset(list_users,output_form=0):
 	
 	return json.dumps(json_dict)
 
-def get_user_location(user):
-		g=geocoders.Google()
-		try:
-			location = g.geocode(user.location,exactly_one=False)
+# def get_user_location(user):
+		# g=geocoders.Google()
+		# try:
+			# location = g.geocode(user.location,exactly_one=False)
 			
-		except:
-			location = [None]
-		try:
-			print user.name,location
-		except:
-			print "this user probably has a weird character"
-		return location[0]
+		# except:
+			# location = [None]
+		# try:
+			# print user.name,location
+		# except:
+			# print "this user probably has a weird character"
+		# return location[0]

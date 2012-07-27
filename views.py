@@ -6,8 +6,8 @@ from django.shortcuts import render_to_response
 import urllib
 import simplejson as json
 from node_builder import buildNodes
-import friendgrapher
-import tweepy
+#import friendgrapher
+#import tweepy
 	
 def home(request,screenname=None):
 
@@ -25,8 +25,7 @@ def home(request,screenname=None):
 def json_server(request, user_id=None):
     print "getting info: %s" % (str(user_id))
     #get all the info from the friends, and send it as a json
-    retStr=str(friendgrapher.create_dataset(friendgrapher.getFriends(user_id)))
-    #retStr="{\"locs\":[{\"lat\":0,\"lng\":0},{\"lat\":6,\"lng\":61},{\"lat\":39,\"lng\":31}]}"
+    #retStr=str(friendgrapher.create_dataset(friendgrapher.getFriends(user_id)))
     return HttpResponse(retStr)
 		
 
