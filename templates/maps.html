@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA07u-PMxRK1n9bLLPzZPTDB6J3Wt2TW6k&sensor=false">
+	 
+    </script>
+	 <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+	 <script src="/files/mytwitlib.js"></script>
+    <script type="text/javascript">
+	var currtime=new Date().getTime();
+	var dataset;
+	$(document).ready(function() {
+	initialize()
+	
+});
+	var map;
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(0, 0),
+          zoom: 2,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+		}
+
+
+
+function setMarker(user){
+console.log("one");
+try
+  {
+  if (user.geocoded_location[0].geometry.location != null) {
+console.log(user);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: user.geocoded_location[0].geometry.location,
+				title: user.screen_name + ": " + user.location + ";;;" + user.geocoded_location[0].formatted_address 
+            });
+
+
+
+            marker.setMap(map);
+        }
+  }
+catch(err)
+  {
+  console.log(err.message)
+  console.log(dataset.nodes[i])
+  }
+}
+function getLocations(dict) {
+var j=0;
+    g = new google.maps.Geocoder();
+	function firegeocode(i){
+	console.log("starting to geocode" + i);
+		currtime=new Date().getTime()-currtime;
+		console.log(currtime);
+            g.geocode({'address': dict.nodes[i].location}, function (results, status) {
+				console.log([i,status]);
+				
+                if (status == google.maps.GeocoderStatus.OK) {
+                    dict.nodes[i]["geocoded_location"] = results
+                    setMarker(dict.nodes[i]);
+                }
+
+            })
+			j++;
+	
+	}
+
+var setAPI = setInterval( function() { firegeocode(j); },800);
+}
+// To add the marker to the map, call setMap();
+
+ function search(){
+//second arg to getUserFriends is the function to call with the json
+getUserFriends($("#searchbox").val(),getLocations);
+}     
+	  
+	 
+    </script>
+  </head>
+  <body onload="">
+  <div style="width:200px;height:100px">
+  <input type="text" name="" id="searchbox" value="leonsass"/>
+<button onclick="search()">Graphit</button>	
+  </div>
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+  </body>
+</html>

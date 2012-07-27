@@ -13,7 +13,7 @@ urlpatterns = patterns('',
    #(r'^lookup/(?P<screenname>\w{0,40})/$', home),
    (r'^twitlib$', testing_twitlib),
    (r'^maps/$', map_test),
-   (r'^$', home),
+   (r'^$', usingjs_view),
    (r'^files/(?P<path>.*)$', 'django.views.static.serve',                {'document_root': settings.MEDIA_ROOT }),
    (r'^dynamic/(?P<user_id>\w{0,40}).json/$', json_server),
     # Uncomment the admin/doc line below to enable admin documentation:
