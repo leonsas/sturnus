@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -7,20 +7,15 @@
       body { height: 100%; margin: 0; padding: 0 }
       #map_canvas { height: 100% }
     </style>
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA07u-PMxRK1n9bLLPzZPTDB6J3Wt2TW6k&sensor=false">
-	 
-    </script>
+    <script type="text/javascript" "http://maps.googleapis.com/maps/api/js?key=AIzaSyA07u-PMxRK1n9bLLPzZPTDB6J3Wt2TW6k&sensor=false"></script>
+	<script src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
 	 <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
 	 <script src="/files/mytwitlib.js"></script>
     <script type="text/javascript">
-	var currtime=new Date().getTime();
-	var dataset;
-	$(document).ready(function() {
-	initialize()
-	
-});
+	Parse.initialize("I9VdZZ5ngl3llrHgNICHkCk50ekwcMtflXSn5FUP", "i80p8reyV68GTCzRMvq547h7klFVvdhNK4Ow0FGR");
+
 	var map;
+	var currtime;
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(0, 0),
@@ -81,6 +76,15 @@ var setAPI = setInterval( function() { firegeocode(j); },800);
 // To add the marker to the map, call setMap();
 
  function search(){
+ 	var SearchObject = Parse.Object.extend("SearchObject");
+var searchObject = new SearchObject();
+searchObject.save({searchType: "maps",query: $("#searchbox").val()});
+	var currtime=new Date().getTime();
+	var dataset;
+	$(document).ready(function() {
+	initialize()
+	
+});
 //second arg to getUserFriends is the function to call with the json
 getUserFriends($("#searchbox").val(),getLocations);
 }     
@@ -89,7 +93,7 @@ getUserFriends($("#searchbox").val(),getLocations);
     </script>
   </head>
   <body onload="">
-  <div style="width:200px;height:100px">
+  <div  id="header-container" style="width:200px;height:100px">
   <input type="text" name="" id="searchbox" value="leonsass"/>
 <button onclick="search()">Graphit</button>	
   </div>

@@ -6,14 +6,22 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="/files/mytwitlib.js"></script>
 	<script src="/files/d3.v2.js"></script>
-	
+	<script src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
   </head>
   <body >
+<div id="header-container">
 <input type="text" name="" id="searchbox" value="leonsass"/>
 <button onclick="search()">Graphit</button>	
-<p id="rate_limit">asd</p>
+<p id="rate_limit"></p>
+</div>
+<div id="chart"></div>
 <script type="text/javascript">
+Parse.initialize("I9VdZZ5ngl3llrHgNICHkCk50ekwcMtflXSn5FUP", "i80p8reyV68GTCzRMvq547h7klFVvdhNK4Ow0FGR");
 function search(){
+var SearchObject = Parse.Object.extend("SearchObject");
+var searchObject = new SearchObject();
+searchObject.save({searchType: "bubble 0.7",query: $("#searchbox").val()});
+	
 //second arg to getUserFriends is the function to call with the json
 getUserFriends($("#searchbox").val(),renderer);
 getRateLimit($("#rate_limit"));
@@ -27,7 +35,7 @@ var n = 20,
     m = 1,
     padding = 6;
 function renderer(nodes) {
-$('body').empty();
+$('#chart').empty();
 nodes = nodes.nodes.map(function(obj) {
     obj.radius = Math.sqrt(obj.followers_count)/(Math.sqrt(obj.followers_count)*0.01+ 10) + 1;
     obj.cx=width/2;
@@ -42,7 +50,7 @@ var force = d3.layout.force()
     .on("tick", tick)
     .start();
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
