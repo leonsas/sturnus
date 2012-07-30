@@ -3,11 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Sturnus</title>
-	<script src="/files/d3.v2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="/files/d3.v2.js"></script>
+	<script src="/files/bootstrap/js/bootstrap.js"></script>
+
+	<script src="/files/mytwitlib.js"></script>
+	<script src="/files/d3.v2.js"></script>
+	<script src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/files/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/files/bootstrap/css/bootstrap-responsive.css" />
+	<link rel="stylesheet" type="text/css" href="/files/styles.css" />
   </head>
-  <body style="background-color:#E8E8E8  ;">
+  <body>
 <script type="text/javascript">
+$(".alert").alert()
+
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-33614666-1']);
@@ -19,22 +30,36 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+function presearch(){
+getFriendsNumber($("#searchbox").val(),	checkFriendsNumber)
+
+} 
+function checkFriendsNumber(numFriends){
+if(numFriends<1005){
+search();
+}
+else{
+$("#too_many_users_alert").css("display","block")
+}
+}  
 </script>		 
-<script type="text/javascript">
-function search(){
-document.location.href = '../' + $("#searchbox").val()
-};
-</script>
-<div  style="margin-left: auto; margin-right: auto; display: block; width: 300px;">
+<div class="container">
+<div class="row">
+  <div class="span4 offset4"><div id="header-container">
 <input type="text" name="" id="searchbox" value="leonsass"/>
-<button onclick="search()">Graphit</button>
+<button id="search_btn" onclick="presearch()">Graphit</button>	
+<p id="rate_limit"></p>
+<div id="too_many_users_alert" class="alert" style="display: none;">
+  
+  <strong>Warning! </strong>That user has a shitton of friends and your computer will cry.
+  <button class="close" data-dismiss="alert" onclick="search()">I don't really care</button>
 </div>
-<div style="height: 100%; margin-left: auto; margin-right: auto; width: 1200px;">
-{%if user_id %}
-<iframe id="ourFrame" src="/user_id/{{user_id}}" width="1200" height="1000">
-Not supported on your browser.</iframe> 
-{%endif%}
- </div>
+</div></div>
+</div>
+</div>
+{% block main_view %}
+
+{%endblock%}
 
   </body>
 </html>

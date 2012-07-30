@@ -1,19 +1,5 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Sturnus</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script src="/files/mytwitlib.js"></script>
-	<script src="/files/d3.v2.js"></script>
-	<script src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
-  </head>
-  <body >
-<div id="header-container">
-<input type="text" name="" id="searchbox" value="leonsass"/>
-<button onclick="search()">Graphit</button>	
-<p id="rate_limit"></p>
-</div>
+{% extends "base.html" %}
+{% block main_view %}
 <div id="chart"></div>
 <script type="text/javascript">
 Parse.initialize("I9VdZZ5ngl3llrHgNICHkCk50ekwcMtflXSn5FUP", "i80p8reyV68GTCzRMvq547h7klFVvdhNK4Ow0FGR");
@@ -21,12 +7,12 @@ function search(){
 var SearchObject = Parse.Object.extend("SearchObject");
 var searchObject = new SearchObject();
 searchObject.save({searchType: "bubble 0.7",query: $("#searchbox").val()});
-	
+
 //second arg to getUserFriends is the function to call with the json
 getUserFriends($("#searchbox").val(),renderer);
 getRateLimit($("#rate_limit"));
 }
- 
+
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 960 - margin.left - margin.right,
     height = 960 - margin.top - margin.bottom;
@@ -60,7 +46,7 @@ var circle = svg.selectAll("circle")
     .data(nodes)
   .enter().append("circle")
     .attr("r", function(d) { return d.radius; })
-	.attr("fill","#0066CC")
+	.attr("fill","#e4d029")
     .call(force.drag);
 circle.append("title").text(function(d){return d.screen_name +": " + d.followers_count;});
 
@@ -112,6 +98,4 @@ function collide(alpha) {
 }};
 
 </script>
-
-  </body>
-</html>
+{%endblock%}

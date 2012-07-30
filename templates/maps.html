@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
+{% extends "base.html" %}
+{% block main_view %}
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #map_canvas { height: 100% }
+
     </style>
+
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA07u-PMxRK1n9bLLPzZPTDB6J3Wt2TW6k&sensor=false"></script>
 	<script src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
 	 <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
@@ -92,11 +93,9 @@ getUserFriends($("#searchbox").val(),getLocations);
 	 
     </script>
   </head>
-  <body onload="">
-  <div  id="header-container" style="width:200px;height:100px">
-  <input type="text" name="" id="searchbox" value="leonsass"/>
-<button onclick="search()">Graphit</button>	
-  </div>
+  <body>
+
     <div id="map_canvas" style="width:100%; height:100%"></div>
   </body>
 </html>
+{%endblock%}

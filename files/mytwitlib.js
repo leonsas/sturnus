@@ -5,7 +5,13 @@ return: array of n-sized arrays with the items (last array may contain less then
         r.push(this.slice(i, i+n));
     return r;
 }
-
+function getFriendsNumber(screen_name,fn){
+lookupurl='http://api.twitter.com/1/users/lookup.json?screen_name=' + screen_name
+$.getJSON(lookupurl+'&callback=?',  function(json)
+		{	
+		fn(json[0].friends_count);
+		});
+}
 function getRateLimit(jquery_selection){
 
 var url='https://api.twitter.com/1/account/rate_limit_status.json'
@@ -37,12 +43,12 @@ function getUserChunkInfo(id_list){
 }
 
 
-	$.getJSON(url,  function(json)
-	{	
-		id_list=json.ids
-        id_list.splitBy(100).forEach(getUserChunkInfo);
-		
-	});
+$.getJSON(url,  function(json)
+{	
+	id_list=json.ids
+	id_list.splitBy(100).forEach(getUserChunkInfo);
+	
+});
 	
 	
 }
