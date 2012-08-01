@@ -1,7 +1,7 @@
 body{
-background-color: #295bd0;
+background-color: #cfeafc;
 height: 100%; 
-
+font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
 }
 
 #header-container{
@@ -15,4 +15,45 @@ width: 80%;
 
 #search_btn{
 
+}
+/* 
+ gridster styling
+ 
+ */
+.sq{
+background-color: #0b6eb0;
+}
+
+.gridster .gs_w {
+    
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.gridster {
+    width: 940px;
+    margin: 0 auto;
+
+    
+
+    -webkit-transition: opacity .6s;
+    -moz-transition: opacity .6s;
+    -o-transition: opacity .6s;
+    -ms-transition: opacity .6s;
+    transition: opacity .6s;
+}
+.gridster li{
+list-style: none;
+}
+
+/*
+	data styling
+*/
+
+.data-container {
+margin: 12px;
+}
+
+.mini-feed{
+font-size: 0.75em;
 }

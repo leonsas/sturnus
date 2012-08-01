@@ -44,11 +44,23 @@ def map_test(request, screenname=None):
                                    
 							 context_instance=RequestContext(request)
 							)
+def reach(request,):
+	print "reach"
+
+	return render_to_response('reach.html',
+                                   
+							 context_instance=RequestContext(request))
+							
 							
 def testing_twitlib(request):
 	return render_to_response('twitlib.html',
 							 context_instance=RequestContext(request)
 							)
+def demo(request):
+	return render_to_response('home-demo.html',
+							 context_instance=RequestContext(request)
+							)
+							
 def usingjs_view(request):
 	return render_to_response('bubble-js.html',
 							 context_instance=RequestContext(request)

@@ -5,6 +5,78 @@ return: array of n-sized arrays with the items (last array may contain less then
         r.push(this.slice(i, i+n));
     return r;
 }
+var results = [];
+var Twitter = {
+	searchBaseURL: 'http://search.twitter.com/search.json',
+	search: function(options){
+		/* 'query' is required
+		'until' defaults to current date formatted for twitterAPI */
+		var default_options = {
+			//'page' : 1,
+			'url': false,
+			'rpp' : 100,
+			'until' : function(){var d = new Date(); return (d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());}()
+		}
+		
+		/*If an option is not passed, set it to the default_option */
+		for(var index in default_options) {
+		if(typeof options[index] == "undefined") options[index] = default_options[index];
+		}
+		
+		//refactor this quicky
+		if (options.url){
+			var lookupURL = this.searchBaseURL + options.url;
+		}
+		else{
+			var lookupURL = this.searchBaseURL +"?q=" + options.query + "&" + "rpp=" + options.rpp;
+		}
+		$.getJSON(lookupURL+'&callback=?',  function(json)
+			{	
+			if (!json.error){
+			console.log(json);
+			results = results.concat(json.results);
+			Twitter.search({url: json.next_page});
+			}
+			else{
+			console.log(results);
+			var ids=resultsToIDs(results);
+			getUsers(ids)
+			}
+			});
+	}
+}
+
+function resultsToIDs(results_list){
+	var id_list=[]
+	for(var i in results_list){
+		id_list.push(results_list[i].from_user_id)
+	}
+	return id_list
+}
+
+var user_list=[]
+function getUsers(id_list){
+	
+	function splitAndQ(mID_list){
+	/*transforms the list of numerical ids to a list of twitter user objects */
+	var lookupBase='http://api.twitter.com/1/users/lookup.json?user_id='
+	var lookupurl=lookupBase;
+	for(var i=0;i<mID_list.length;i++){
+	lookupurl=lookupurl+mID_list[i]+','
+	}
+	$.getJSON(lookupurl+'&callback=?',  function(json)
+		{	
+			user_list=user_list.concat(json);
+			console.log("splitandQ")
+		});
+	}
+	
+	id_list.splitBy(100).forEach(splitAndQ);
+}
+
+
+
+//maps and lookup--quick/ very dirty below
 function getFriendsNumber(screen_name,fn){
 lookupurl='http://api.twitter.com/1/users/lookup.json?screen_name=' + screen_name
 $.getJSON(lookupurl+'&callback=?',  function(json)

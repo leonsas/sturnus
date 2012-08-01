@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-from app.views import home, json_builder, json_server, map_test, testing_twitlib,usingjs_view
+from app.views import home, json_builder, json_server, map_test, testing_twitlib,usingjs_view,reach,demo
 from django.conf import settings
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -13,6 +13,8 @@ urlpatterns = patterns('',
    #(r'^lookup/(?P<screenname>\w{0,40})/$', home),
    (r'^twitlib$', testing_twitlib),
    (r'^maps/$', map_test),
+   (r'^reach/$', reach),
+   (r'^demo/$', demo),
    (r'^$', usingjs_view),
    (r'^files/(?P<path>.*)$', 'django.views.static.serve',                {'document_root': settings.MEDIA_ROOT }),
    (r'^dynamic/(?P<user_id>\w{0,40}).json/$', json_server),
