@@ -8,7 +8,7 @@ return: array of n-sized arrays with the items (last array may contain less then
 var results = [];
 var Twitter = {
 	searchBaseURL: 'http://search.twitter.com/search.json',
-	search: function(options){
+	search: function(options, fn){
 		/* 'query' is required
 		'until' defaults to current date formatted for twitterAPI */
 		var default_options = {
@@ -23,7 +23,7 @@ var Twitter = {
 		if(typeof options[index] == "undefined") options[index] = default_options[index];
 		}
 		
-		//refactor this quicky
+		//refactor this quicky, first time add all the options. second+ time just use the returnURL
 		if (options.url){
 			var lookupURL = this.searchBaseURL + options.url;
 		}
@@ -35,12 +35,11 @@ var Twitter = {
 			if (!json.error){
 			console.log(json);
 			results = results.concat(json.results);
-			Twitter.search({url: json.next_page});
+			Twitter.search({url: json.next_page},fn);
 			}
 			else{
 			console.log(results);
-			var ids=resultsToIDs(results);
-			getUsers(ids)
+			fn();
 			}
 			});
 	}
@@ -55,7 +54,7 @@ function resultsToIDs(results_list){
 }
 
 var user_list=[]
-function getUsers(id_list){
+function getUsers(id_list, fn){
 	
 	function splitAndQ(mID_list){
 	/*transforms the list of numerical ids to a list of twitter user objects */
@@ -68,10 +67,13 @@ function getUsers(id_list){
 		{	
 			user_list=user_list.concat(json);
 			console.log("splitandQ")
+			fn()
 		});
 	}
 	
 	id_list.splitBy(100).forEach(splitAndQ);
+	
+	
 }
 
 

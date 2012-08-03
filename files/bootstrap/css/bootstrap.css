@@ -542,7 +542,7 @@ ol {
 }
 
 li {
-  line-height: 18px;
+  line-height: 14px;
 }
 
 ul.unstyled,
@@ -584,7 +584,7 @@ dd {
 }
 
 hr {
-  margin: 18px 0;
+  margin: 10px 0;
   border: 0;
   border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #ffffff;

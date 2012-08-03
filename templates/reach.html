@@ -11,35 +11,29 @@
     <script type="text/javascript">
 	Parse.initialize("I9VdZZ5ngl3llrHgNICHkCk50ekwcMtflXSn5FUP", "i80p8reyV68GTCzRMvq547h7klFVvdhNK4Ow0FGR");
 
-	
-
-
-var tas =function(){
-			return 3
-			}()
-
 // To add the marker to the map, call setMap();
 
  function search(){
 
 
-	Twitter.search({'query': $("#searchbox").val()})
-
-	setTimeout(function(){ afterTimeOut(user_list);}, 25000)
-		
-		function afterTimeOut(ulist){
-			var time_elapsed=function(){
+	Twitter.search({'query': $("#searchbox").val()},function(){
+	
+	var ids = resultsToIDs(results);
+	getUsers(ids, function(){
+		console.log("entrando a getUsers Callback");
+		var time_elapsed=function(){
 			return ((Date.parse(results[0].created_at)-Date.parse(results[results.length-1].created_at))/3600)
 			}()
+			
 			var sum_followers=0;
-			for (var i=0;i<ulist.length;i++){
-			sum_followers+=ulist[i].followers_count
+			for (var i=0;i<user_list.length;i++){
+			sum_followers+=user_list[i].followers_count
 			}
-			alert('That query impacted ' + sum_followers + ' people, in ' + time_elapsed + ' hours')
-		};
+			console.log('That query impacted ' + sum_followers + ' people, in ' + time_elapsed + ' hours')
 	
-//second arg to getUserFriends is the function to call with the json
-//getUserFriends($("#searchbox").val(),getLocations);
+	})
+	
+	})
 }     
 	  
 	 
