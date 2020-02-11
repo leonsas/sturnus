@@ -1,4 +1,4 @@
-Django==1.4
+Django==1.11.28
 distribute==0.6.24
 simplejson==2.6.0
 tweepy==1.10
